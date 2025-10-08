@@ -1,13 +1,37 @@
 name: Keep Site Awake
 
 on:
-  workflow_dispatch:       # 👈 allows manual triggering
   schedule:
-    - cron: '*/1 * * * *'  # every 1 minutes
+    - cron: '*/12 * * * *'  # every 12 minutes
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Curl your site
-        run: curl -s https://www.tuttowebdev.com
+      - name: Randomly ping your site
+        run: |
+          URLS=(
+            "https://www.tuttowebdev.com/"
+            "https://www.tuttowebdev.com/about"
+            "https://www.tuttowebdev.com/amico"
+            "https://www.tuttowebdev.com/scrivo"
+            "https://www.tuttowebdev.com/webdev"
+            "https://www.tuttowebdev.com/webdev#fullstack"
+            "https://www.tuttowebdev.com/webdev#seo"
+            "https://www.tuttowebdev.com/webdev#frontend"
+            "https://www.tuttowebdev.com/webdev#backend"
+            "https://www.tuttowebdev.com/contact"
+          )
+
+          AGENTS=(
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/117.0.0.0 Safari/537.36"
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Safari/605.1.15"
+            "Mozilla/5.0 (X11; Linux x86_64) Gecko/20100101 Firefox/118.0"
+            "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 Safari/604.1"
+          )
+
+          URL=${URLS[$RANDOM % ${#URLS[@]}]}
+          AGENT=${AGENTS[$RANDOM % ${#AGENTS[@]}]}
+
+          echo "Pinging $URL with agent: $AGENT"
+          curl -s -A "$AGENT" "$URL"
