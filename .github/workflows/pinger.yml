@@ -3,7 +3,7 @@ name: Keep Site Awake
 on:
   workflow_dispatch:       # 👈 allows manual triggering
   schedule:
-    - cron: '*/1 * * * *'  # every 10 minutes
+    - cron: '*/1 * * * *'  # every 1 minutes
 
 jobs:
   ping:
