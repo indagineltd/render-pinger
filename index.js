@@ -10,8 +10,8 @@ function pingSite() {
   });
 };
 
-// Ping every 10 minutes
-setInterval(pingSite, 10 * 60 * 1000);
+// Ping every 1 minute
+setInterval(pingSite, 1 * 60 * 1000);
 
 // Call the function
 pingSite();
