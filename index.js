@@ -9,7 +9,7 @@ const urls = [
   'https://www.tuttowebdev.com/webdev#fullstack',
   'https://www.tuttowebdev.com/webdev#seo',
   'https://www.tuttowebdev.com/webdev#frontend',
-  'https://www.tuttowebdev.com/webdev#backend',
+  'https://www.tuttowebdev.com/webdev',
   'https://www.tuttowebdev.com/contact'
 ];
 
