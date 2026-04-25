@@ -1,20 +1,33 @@
-# Render Pinger 🔔
+Render Pinger 🔔
+This project keeps a Render‑hosted HTTP service awake by periodically pinging it using GitHub Actions.
+A Node.js script is included for optional use with a Render worker, but workers on the free plan sleep after 15 minutes — so GitHub Actions is the reliable method.
 
-This project keeps a Render‑hosted HTTP service awake by periodically pinging it using **GitHub Actions** and a simple Node.js script.
+📂 Project Structure
+.github/workflows/pinger.yml → GitHub Actions workflow that pings your site every 15 minutes.
 
-## 📂 Project Structure
-- `.github/workflows/pinger.yml` → GitHub Actions workflow that pings your site every 12 minutes.
-- `.render.yaml` → Render configuration for deploying the worker service.
-- `index.js` → Node.js script that randomly selects a URL and sends an HTTPS request.
-- `package.json` / `package-lock.json` → Node.js project metadata and dependencies.
+index.js → Optional Node.js script for a Render worker (runs continuously only on paid plans).
 
-## ⚙️ How It Works
-- The GitHub Actions workflow runs on a schedule (`cron: */12 * * * *`) and sends requests to a list of URLs.
-- The Node.js script (`index.js`) also pings the same URLs every 12 minutes when deployed as a Render worker.
-- Random user agents are used to simulate different clients.
+package.json / package-lock.json → Node.js project metadata and dependencies.
 
-## 🚀 Usage
-1. Clone this repository.
-2. Install dependencies:
-   ```bash
-   npm install
+⚙️ How It Works
+The GitHub Actions workflow runs on a schedule (cron: */15 * * * *) and sends a request to one of several URLs.
+
+Random user agents are used to simulate different clients.
+
+This keeps your Render app awake on the free plan, without needing a Render worker.
+
+The index.js script can be used on Render if you upgrade to a paid worker plan.
+
+🚀 Usage
+Clone this repository.
+
+Install dependencies:
+
+bash
+npm install
+Commit the GitHub Actions workflow — it will automatically run every 15 minutes.
+
+📝 Notes
+Render free workers sleep after 15 minutes, so GitHub Actions is the recommended method for uptime on the free plan.
+
+If 
