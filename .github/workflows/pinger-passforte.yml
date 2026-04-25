@@ -1,0 +1,26 @@
+name: Keep PassForte Awake
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # runs every 15 minutes
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping PassForte
+        run: |
+          URL="https://tutto-passforte.onrender.com/"
+
+          AGENTS=(
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/117 Safari/537.36"
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Safari/605.1.15"
+            "Mozilla/5.0 (X11; Linux x86_64) Gecko/20100101 Firefox/118.0"
+            "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1"
+          )
+
+          AGENT=${AGENTS[$RANDOM % ${#AGENTS[@]}]}
+
+          echo "Pinging $URL"
+          curl -A "$AGENT" -s --retry 3 --max-time 10 "$URL"
