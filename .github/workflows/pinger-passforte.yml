@@ -23,4 +23,5 @@ jobs:
           AGENT=${AGENTS[$RANDOM % ${#AGENTS[@]}]}
 
           echo "Pinging $URL"
-          curl -A "$AGENT" -s --retry 3 --max-time 10 "$URL"
+          curl -A "$AGENT" -s --retry 3 --max-time 30 "$URL"
+
