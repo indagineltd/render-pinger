@@ -21,7 +21,7 @@ function pingSite() {
 }
 
 // Ping every 12 minutes (only works 24/7 on paid Render workers)
-setInterval(pingSite, 12 * 60 * 1000);
+setInterval(pingSite, 15 * 60 * 1000);
 pingSite(); // Initial ping
 
 
